@@ -1,0 +1,38 @@
+﻿<Window x:Class="LbkRegister.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LbkRegister.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="725">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Content="Registrera anmälan" Click="RegisterButton_Click" Width="200" Height="50" Grid.Row="0" Grid.Column="0" Margin="20" />
+        <Button Content="Skapa katalog" Click="CatalogButton_Click" Width="200" Height="50" Grid.Row="0" Grid.Column="1" Margin="20" />
+
+        <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Margin="20" />
+
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Registrations}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed}" />
+                    <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName}" />
+                    <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName}" />
+                    <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
