@@ -15,19 +15,16 @@ namespace LbkRegister.Data {
             Directory.CreateDirectory(path);
         }
 
-        internal static void Save(Registration registration, IEnumerable<Registration> _existing) {
-            var result = _existing.Concat(new[] { registration });
+        internal static void Save(Registration registration, IEnumerable<Registration> existing) {
+            var result = existing.Concat(new[] { registration });
 
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
-            var files = Directory.GetFiles(path);
-            var count = files.Any() 
-                ? files
-                    .Where(f => Path.GetFileNameWithoutExtension(f).Contains(_saveFileName))
-                    .Max(n => int.Parse(Path.GetFileNameWithoutExtension(n).Substring(_saveFileName.Length))) + 1 
-                : 0;
-            var fullPath = Path.Combine(path, _saveFileName) + count.ToString() + ".txt";
+            Save(result);
+        }
 
-            File.WriteAllText(fullPath, JsonConvert.SerializeObject(result));
+        internal static void Delete(Registration registration, IEnumerable<Registration> registrations) {
+            var result = registrations.Where(x => x != registration);
+
+            Save(result);
         }
 
         internal static IEnumerable<Registration> Load() {
@@ -43,6 +40,19 @@ namespace LbkRegister.Data {
             var fullPath = Path.Combine(path, _saveFileName) + count.ToString() + ".txt";
 
             return JsonConvert.DeserializeObject<IEnumerable<Registration>>(File.ReadAllText(fullPath));
+        }
+
+        private static void Save(IEnumerable<Registration> result) {
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
+            var files = Directory.GetFiles(path);
+            var count = files.Any()
+                ? files
+                    .Where(f => Path.GetFileNameWithoutExtension(f).Contains(_saveFileName))
+                    .Max(n => int.Parse(Path.GetFileNameWithoutExtension(n).Substring(_saveFileName.Length))) + 1
+                : 0;
+            var fullPath = Path.Combine(path, _saveFileName) + count.ToString() + ".txt";
+
+            File.WriteAllText(fullPath, JsonConvert.SerializeObject(result));
         }
     }
 }

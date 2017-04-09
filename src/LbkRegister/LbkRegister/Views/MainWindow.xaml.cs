@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using LbkRegister.Data;
 using LbkRegister.Domain;
 using LbkRegister.ViewModels;
@@ -46,6 +47,14 @@ namespace LbkRegister.Views {
 
         private void CatalogButton_Click(object sender, RoutedEventArgs e) {
 
+        }
+
+        private void GroupChangeButton_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            (DataContext as MainWindowViewModel).DeleteRegistration((sender as Button).DataContext as Registration);
         }
     }
 }

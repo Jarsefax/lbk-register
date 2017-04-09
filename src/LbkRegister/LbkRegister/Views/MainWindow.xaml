@@ -31,6 +31,27 @@
                     <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName}" />
                     <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName}" />
                     <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail}" />
+                    <GridViewColumn Header="Byt klass">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Margin="0"
+                                    VerticalAlignment="Center"
+                                    Click="GroupChangeButton_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Ta bort">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Width="35"
+                                    Height="15"
+                                    VerticalAlignment="Center"
+                                    Click="DeleteButton_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -32,6 +33,11 @@ namespace LbkRegister.ViewModels {
             Emails = Registrations.Any() 
                 ? Registrations.Select(x => x.OwnerEmail).Aggregate((y, z) => y + ";" + z) 
                 : string.Empty;
+        }
+
+        internal void DeleteRegistration(Registration registration) {
+            Persistence.Delete(registration, Registrations);
+            UpdateRegistrations();
         }
 
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
