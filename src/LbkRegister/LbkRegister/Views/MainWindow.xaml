@@ -34,8 +34,9 @@
                     <GridViewColumn Header="Byt klass">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button
-                                    Margin="0"
+                                <Button                                    
+                                    Width="40"
+                                    Height="15"
                                     VerticalAlignment="Center"
                                     Click="GroupChangeButton_Click" />
                             </DataTemplate>
@@ -45,7 +46,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button
-                                    Width="35"
+                                    Width="40"
                                     Height="15"
                                     VerticalAlignment="Center"
                                     Click="DeleteButton_Click" />

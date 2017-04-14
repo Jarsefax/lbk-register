@@ -50,7 +50,10 @@ namespace LbkRegister.Views {
         }
 
         private void GroupChangeButton_Click(object sender, RoutedEventArgs e) {
+            var dialog = new ChangeGroup((sender as Button).DataContext as Registration, (DataContext as MainWindowViewModel).Registrations);
+            dialog.ShowDialog();
 
+            (DataContext as MainWindowViewModel).UpdateRegistrations();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {

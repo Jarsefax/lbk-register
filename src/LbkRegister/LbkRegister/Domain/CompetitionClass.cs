@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LbkRegister.Domain {
     public static class CompetitionClass {
@@ -13,6 +14,9 @@ namespace LbkRegister.Domain {
             FifteenMonths = 3,
             EightYears = 4
         }
+
+        public static IEnumerable<Categories> List => 
+            new List<Categories> { Categories.SixMonths, Categories.NineMonths, Categories.FifteenMonths, Categories.EightYears };
 
         public static string ToName(this Categories category) {
             switch (category) {

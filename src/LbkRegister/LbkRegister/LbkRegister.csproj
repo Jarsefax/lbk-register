@@ -61,10 +61,18 @@
     </ApplicationDefinition>
     <Compile Include="IO\Persistence.cs" />
     <Compile Include="IO\CatalogGenerator.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\ChangeGroup.xaml.cs">
+      <DependentUpon>ChangeGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewRegistration.xaml.cs">
       <DependentUpon>NewRegistration.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\ChangeGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

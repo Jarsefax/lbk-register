@@ -42,7 +42,7 @@ namespace LbkRegister.Data {
             return JsonConvert.DeserializeObject<IEnumerable<Registration>>(File.ReadAllText(fullPath));
         }
 
-        private static void Save(IEnumerable<Registration> result) {
+        internal static void Save(IEnumerable<Registration> result) {
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
             var files = Directory.GetFiles(path);
             var count = files.Any()

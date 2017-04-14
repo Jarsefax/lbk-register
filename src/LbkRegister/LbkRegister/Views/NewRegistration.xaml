@@ -54,7 +54,7 @@
         <TextBox Text="{Binding IdentificationNumber}" Grid.Column="1" Grid.Row="2" Margin="5" />
         <TextBox Text="{Binding Sex}" Grid.Column="1" Grid.Row="3" Margin="5" />
         <TextBox Text="{Binding BirthDate}" Grid.Column="1" Grid.Row="4" Margin="5" />
-        <ListBox ItemsSource="{Binding Groups}" Grid.Column="1" Grid.Row="5" Margin="5" />
+        <ListBox ItemsSource="{Binding Group}" Grid.Column="1" Grid.Row="5" Margin="5" />
         <TextBox Text="{Binding Father}" Grid.Column="1" Grid.Row="6" Margin="5" />
         <TextBox Text="{Binding Mother}" Grid.Column="1" Grid.Row="7" Margin="5" />
         <TextBox Text="{Binding Breeder}" Grid.Column="1" Grid.Row="8" Margin="5" />
