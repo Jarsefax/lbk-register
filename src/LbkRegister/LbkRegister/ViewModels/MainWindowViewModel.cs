@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -20,6 +19,36 @@ namespace LbkRegister.ViewModels {
             set { SetField(ref emails, value); }
         }
 
+        private int sixMonthsCount;
+        public int SixMonthsCount {
+            get { return sixMonthsCount; }
+            set { SetField(ref sixMonthsCount, value); }
+        }
+
+        private int nineMonthsCount;
+        public int NineMonthsCount {
+            get { return nineMonthsCount; }
+            set { SetField(ref nineMonthsCount, value); }
+        }
+
+        private int fifteenMonthsCount;
+        public int FifteenMonthsCount {
+            get { return fifteenMonthsCount; }
+            set { SetField(ref fifteenMonthsCount, value); }
+        }
+
+        private int eightYearsCount;
+        public int EightYearsCount {
+            get { return eightYearsCount; }
+            set { SetField(ref eightYearsCount, value); }
+        }
+
+        private int totalCount;
+        public int TotalCount {
+            get { return totalCount; }
+            set { SetField(ref totalCount, value); }
+        }
+
         public MainWindowViewModel() {
             UpdateRegistrations();
         }
@@ -33,6 +62,11 @@ namespace LbkRegister.ViewModels {
             Emails = Registrations.Any() 
                 ? Registrations.Select(x => x.OwnerEmail).Aggregate((y, z) => y + ";" + z) 
                 : string.Empty;
+            SixMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.SixMonths).Count();
+            NineMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.NineMonths).Count();
+            FifteenMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.FifteenMonths).Count();
+            EightYearsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.EightYears).Count();
+            TotalCount = Registrations.Count();
         }
 
         internal void DeleteRegistration(Registration registration) {

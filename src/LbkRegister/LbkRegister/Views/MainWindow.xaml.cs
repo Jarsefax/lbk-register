@@ -3,11 +3,17 @@ using System.Windows.Controls;
 using LbkRegister.Data;
 using LbkRegister.Domain;
 using LbkRegister.ViewModels;
+using static LbkRegister.Domain.CompetitionClass;
 
 namespace LbkRegister.Views {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+
+            sixMonthsLabel.Text = Categories.SixMonths.ToName();
+            nineMonthsLabel.Text = Categories.NineMonths.ToName();
+            fifteenMonthsLabel.Text = Categories.FifteenMonths.ToName();
+            eightYearsLabel.Text = Categories.EightYears.ToName();
 
             Persistence.Initialize();
             DataContext = new MainWindowViewModel();

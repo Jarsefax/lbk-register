@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LbkRegister.Views"
         mc:Ignorable="d"
-        Title="ChangeGroup" Height="106.077" Width="300">
+        Title="Byt grupp" Height="106.077" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
