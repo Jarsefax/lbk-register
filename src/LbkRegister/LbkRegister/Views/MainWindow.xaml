@@ -36,20 +36,23 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Name="sixMonthsLabel" />
             <TextBlock Grid.Column="0" Grid.Row="1" Name="nineMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="fifteenMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="3" Name="eightYearsLabel" />
-            <Separator Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" />
-            <TextBlock Grid.Column="0" Grid.Row="5" Text="Totalt" />            
+            <TextBlock Grid.Column="0" Grid.Row="2" Name="nineToFifteenMonthsLabel" />            
+            <TextBlock Grid.Column="0" Grid.Row="3" Name="fifteenMonthsLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="4" Name="eightYearsLabel" />
+            <Separator Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" />
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="Totalt" />            
 
             <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding SixMonthsCount}" />
             <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding NineMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding FifteenMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding EightYearsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding TotalCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding NineToFifteenMonthsCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding FifteenMonthsCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding EightYearsCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="6" Margin="40,0,0,0" Text="{Binding TotalCount}" />
         </Grid>
 
         <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" />

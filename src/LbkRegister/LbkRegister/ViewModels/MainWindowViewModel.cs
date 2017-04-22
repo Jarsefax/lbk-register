@@ -31,6 +31,12 @@ namespace LbkRegister.ViewModels {
             set { SetField(ref nineMonthsCount, value); }
         }
 
+        private int nineToFifteenMonthsCount;
+        public int NineToFifteenMonthsCount {
+            get { return nineToFifteenMonthsCount; }
+            set { SetField(ref nineToFifteenMonthsCount, value); }
+        }
+
         private int fifteenMonthsCount;
         public int FifteenMonthsCount {
             get { return fifteenMonthsCount; }
@@ -64,6 +70,7 @@ namespace LbkRegister.ViewModels {
                 : string.Empty;
             SixMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.SixMonths).Count();
             NineMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.NineMonths).Count();
+            NineToFifteenMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.NineToFifteenMonths).Count();
             FifteenMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.FifteenMonths).Count();
             EightYearsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.EightYears).Count();
             TotalCount = Registrations.Count();

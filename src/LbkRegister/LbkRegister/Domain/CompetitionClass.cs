@@ -5,18 +5,20 @@ namespace LbkRegister.Domain {
     public static class CompetitionClass {
         public const string _sixMonthsName = "Valp 4-6 mån";
         public const string _nineMonthsName = "Valp 6-9 mån";
-        public const string _fifteenMonthsName = "Junior 9-15 mån";
+        public const string _nineToFifteenMonthsName = "Junior 9-15 mån";
+        public const string _fifteenMonthsName = "Vuxen från 15 mån";
         public const string _eightYearsName = "Veteran från 8 år";
 
         public enum Categories {
             SixMonths = 1,
             NineMonths = 2,
-            FifteenMonths = 3,
-            EightYears = 4
+            NineToFifteenMonths = 3,
+            FifteenMonths = 4,
+            EightYears = 5
         }
 
         public static IEnumerable<Categories> List => 
-            new List<Categories> { Categories.SixMonths, Categories.NineMonths, Categories.FifteenMonths, Categories.EightYears };
+            new List<Categories> { Categories.SixMonths, Categories.NineMonths, Categories.NineToFifteenMonths, Categories.FifteenMonths, Categories.EightYears };
 
         public static string ToName(this Categories category) {
             switch (category) {
@@ -24,6 +26,8 @@ namespace LbkRegister.Domain {
                     return _sixMonthsName;
                 case Categories.NineMonths:
                     return _nineMonthsName;
+                case Categories.NineToFifteenMonths:
+                    return _nineToFifteenMonthsName;
                 case Categories.FifteenMonths:
                     return _fifteenMonthsName;
                 case Categories.EightYears:
@@ -39,6 +43,8 @@ namespace LbkRegister.Domain {
                     return Categories.SixMonths;
                 case _nineMonthsName:
                     return Categories.NineMonths;
+                case _nineToFifteenMonthsName:
+                    return Categories.NineToFifteenMonths;
                 case _fifteenMonthsName:
                     return Categories.FifteenMonths;
                 case _eightYearsName:
@@ -55,6 +61,10 @@ namespace LbkRegister.Domain {
 
             if (line.Contains(_nineMonthsName)) {
                 return Categories.NineMonths;
+            }
+
+            if (line.Contains(_nineToFifteenMonthsName)) {
+                return Categories.NineToFifteenMonths;
             }
 
             if (line.Contains(_fifteenMonthsName)) {

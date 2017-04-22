@@ -12,6 +12,7 @@ namespace LbkRegister.Views {
 
             sixMonthsLabel.Text = Categories.SixMonths.ToName();
             nineMonthsLabel.Text = Categories.NineMonths.ToName();
+            nineToFifteenMonthsLabel.Text = Categories.NineToFifteenMonths.ToName();
             fifteenMonthsLabel.Text = Categories.FifteenMonths.ToName();
             eightYearsLabel.Text = Categories.EightYears.ToName();
 
