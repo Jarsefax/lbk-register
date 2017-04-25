@@ -73,7 +73,7 @@
             
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nummer" Width="Auto" DisplayMemberBinding="{Binding Number, Mode=OneWay}" />
+                    <GridViewColumn Header="Nummer" Width="Auto" DisplayMemberBinding="{Binding CompetitionNumber, Mode=OneWay}" />
                     <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed, Mode=OneWay}" />
                     <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name, Mode=OneWay}" />
                     <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName, Mode=OneWay}" />

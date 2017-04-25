@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Domain\CompetitionGroup.cs" />
     <Compile Include="IO\Persistence.cs" />
     <Compile Include="IO\CatalogGenerator.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
