@@ -13,6 +13,7 @@ namespace LbkRegister.Views {
             sixMonthsLabel.Text = Categories.SixMonths.ToName();
             nineMonthsLabel.Text = Categories.NineMonths.ToName();
             nineToFifteenMonthsLabel.Text = Categories.NineToFifteenMonths.ToName();
+            fifteenToTwentyFourMonthsLabel.Text = Categories.FifteenToTwentyFourMonths.ToName();
             fifteenMonthsLabel.Text = Categories.FifteenMonths.ToName();
             eightYearsLabel.Text = Categories.EightYears.ToName();
 
@@ -52,8 +53,11 @@ namespace LbkRegister.Views {
             }
         }
 
-        private void CatalogButton_Click(object sender, RoutedEventArgs e) {
+        private void ChangeRegistrationButton_Click(object sender, RoutedEventArgs e) {
+            var dialog = new ChangeRegistration((sender as Button).DataContext as Registration, (DataContext as MainWindowViewModel).Registrations);
+            dialog.ShowDialog();
 
+            (DataContext as MainWindowViewModel).UpdateRegistrations();
         }
 
         private void GroupChangeButton_Click(object sender, RoutedEventArgs e) {
@@ -65,6 +69,10 @@ namespace LbkRegister.Views {
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             (DataContext as MainWindowViewModel).DeleteRegistration((sender as Button).DataContext as Registration);
+        }
+
+        private void CatalogButton_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }

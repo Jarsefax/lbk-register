@@ -20,8 +20,10 @@ namespace LbkRegister.Domain {
         private const string _ownerEmailIdentifier = "Din epost:";
         private const string _noteIdentifier = "Meddelande:";
 
+        public int? Number { get; set; }
         public string Source { get; }
         public string Breed { get; set; }
+        public bool BreedError => true;
         public string Name { get; set; }
         public string IdentificationNumber { get; set; }
         public string Sex { get; set; }

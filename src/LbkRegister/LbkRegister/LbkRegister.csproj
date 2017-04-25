@@ -66,10 +66,17 @@
     <Compile Include="Views\ChangeGroup.xaml.cs">
       <DependentUpon>ChangeGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangeRegistration.xaml.cs">
+      <DependentUpon>ChangeRegistration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewRegistration.xaml.cs">
       <DependentUpon>NewRegistration.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ChangeGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

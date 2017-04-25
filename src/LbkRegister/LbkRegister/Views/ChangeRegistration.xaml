@@ -1,11 +1,11 @@
-﻿<Window x:Class="LbkRegister.Views.NewRegistration"
+﻿<Window x:Class="LbkRegister.Views.ChangeRegistration"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LbkRegister.Views"
         mc:Ignorable="d"
-        Title="Ny amnmälan" Height="560" Width="600">
+        Title="ChangeRegistration" Height="530" Width="400">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -37,7 +37,6 @@
         <TextBlock Text="Registreringsnummer" Grid.Column="0" Grid.Row="2" Margin="5" />
         <TextBlock Text="Kön" Grid.Column="0" Grid.Row="3" Margin="5" />
         <TextBlock Text="Födelsedatum" Grid.Column="0" Grid.Row="4" Margin="5" />
-        <TextBlock Text="Anmäler till" Grid.Column="0" Grid.Row="5" Margin="5" />
         <TextBlock Text="Fader" Grid.Column="0" Grid.Row="6" Margin="5" />
         <TextBlock Text="Moder" Grid.Column="0" Grid.Row="7" Margin="5" />
         <TextBlock Text="Uppfödare" Grid.Column="0" Grid.Row="8" Margin="5" />
@@ -54,7 +53,6 @@
         <TextBox Text="{Binding IdentificationNumber}" Grid.Column="1" Grid.Row="2" Margin="5" />
         <TextBox Text="{Binding Sex}" Grid.Column="1" Grid.Row="3" Margin="5" />
         <TextBox Text="{Binding BirthDate}" Grid.Column="1" Grid.Row="4" Margin="5" />
-        <TextBox Text="{Binding GroupName, Mode=OneWay}" Grid.Column="1" Grid.Row="5" Margin="5" IsReadOnly="True" />
         <TextBox Text="{Binding Father}" Grid.Column="1" Grid.Row="6" Margin="5" />
         <TextBox Text="{Binding Mother}" Grid.Column="1" Grid.Row="7" Margin="5" />
         <TextBox Text="{Binding Breeder}" Grid.Column="1" Grid.Row="8" Margin="5" />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LbkRegister.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="725">
+        Title="MainWindow" Height="550" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -18,7 +18,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="10" VerticalAlignment="Center">
             <Button Content="Registrera anmälan" Click="RegisterButton_Click" Width="200" Height="50" Margin="0,0,0,10" />
             <Button Content="Skapa katalog" Click="CatalogButton_Click" Width="200" Height="50" Margin="0,10,0,0" />
         </StackPanel>
@@ -34,37 +34,62 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Name="sixMonthsLabel" />
             <TextBlock Grid.Column="0" Grid.Row="1" Name="nineMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="nineToFifteenMonthsLabel" />            
-            <TextBlock Grid.Column="0" Grid.Row="3" Name="fifteenMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="4" Name="eightYearsLabel" />
-            <Separator Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" />
-            <TextBlock Grid.Column="0" Grid.Row="6" Text="Totalt" />            
+            <TextBlock Grid.Column="0" Grid.Row="2" Name="nineToFifteenMonthsLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="3" Name="fifteenToTwentyFourMonthsLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="4" Name="fifteenMonthsLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="5" Name="eightYearsLabel" />
+            <Separator Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" />
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Totalt" />            
 
             <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding SixMonthsCount}" />
             <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding NineMonthsCount}" />
             <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding NineToFifteenMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding FifteenMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding EightYearsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="6" Margin="40,0,0,0" Text="{Binding TotalCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding FifteenToTwentyFourMonthsCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding FifteenMonthsCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding EightYearsCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding TotalCount}" />
         </Grid>
 
         <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" />
 
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Registrations}">
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding BreedError, Mode=OneWay}" Value="True">
+                            <Setter Property="Background" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
+            
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed}" />
-                    <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName}" />
-                    <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName}" />
-                    <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail}" />
+                    <GridViewColumn Header="Nummer" Width="Auto" DisplayMemberBinding="{Binding Number, Mode=OneWay}" />
+                    <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed, Mode=OneWay}" />
+                    <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name, Mode=OneWay}" />
+                    <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName, Mode=OneWay}" />
+                    <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName, Mode=OneWay}" />
+                    <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail, Mode=OneWay}" />
+                    <GridViewColumn Header="Ändra anmälan">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button                                    
+                                    Width="40"
+                                    Height="15"
+                                    VerticalAlignment="Center"
+                                    Click="ChangeRegistrationButton_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Byt klass">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
