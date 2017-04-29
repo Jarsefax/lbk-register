@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace LbkRegister.Domain {
-    public class Registration {
+    public class Registration : INotifyPropertyChanged {
         private const string _breedIdentifier = "Ras:";
         private const string _nameIdentifier = "Namn enligt registreringsbevis:";
         private const string _identificationNumberIdentifier = "Registreringsnummer:";
@@ -19,18 +23,38 @@ namespace LbkRegister.Domain {
         private const string _ownerPhoneNumberIdentifier = "Ditt telefon nummer:";
         private const string _ownerEmailIdentifier = "Din epost:";
         private const string _noteIdentifier = "Meddelande:";
+        
+        [JsonIgnore]
+        public int CompetitionNumber {
+            get { return competitionNumber; }
+            set { SetField(ref competitionNumber, value); }
+        }
+        private int competitionNumber;
 
-        public int? CompetitionNumber { get; set; }
-        public CompetitionGroup.Groups? CompetitionGroup { get; set; }
+        [JsonIgnore]
+        internal CompetitionGroup.Groups CompetitionGroup => Breed.FromBreed();
+
+        [JsonIgnore]
+        internal CompetitionRing.Rings Ring => CompetitionGroup.FromGroup();
+
+        [JsonIgnore]
+        internal string GroupName => Group.ToName();
+
+        //[JsonIgnore]
+        //public bool BreedError {
+        //    get { return breedError; }
+        //    set { SetField(ref breedError, value); }
+        //}
+        //private bool breedError;
+        public bool BreedError => Breed.FromBreed() == Domain.CompetitionGroup.Groups.Unknown;
+
         public string Source { get; }
         public string Breed { get; set; }
-        public bool BreedError => Breed.FromBreed() == Domain.CompetitionGroup.Groups.Unknown;
         public string Name { get; set; }
         public string IdentificationNumber { get; set; }
         public string Sex { get; set; }
         public string BirthDate { get; set; }
         public CompetitionClass.Categories Group { get; set; }
-        public string GroupName => Group.ToName();
         public string Father { get; set; }
         public string Mother { get; set; }
         public string Breeder { get; set; }
@@ -146,6 +170,22 @@ namespace LbkRegister.Domain {
         private void SetNote(string[] lines) {
             var line = lines.Single(l => l.Contains(_noteIdentifier));
             Note = line.Substring(line.IndexOf(_noteIdentifier) + _noteIdentifier.Length).Trim();
+        }
+
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
+            if (EqualityComparer<T>.Default.Equals(field, value)) {
+                return false;
+            }
+
+            field = value;
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

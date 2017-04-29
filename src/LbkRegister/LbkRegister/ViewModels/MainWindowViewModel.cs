@@ -64,16 +64,15 @@ namespace LbkRegister.ViewModels {
         public MainWindowViewModel() {
             UpdateRegistrations();
         }
-
-        private IEnumerable<Registration> LoadRegistrations() {
-            return Persistence.Load();
-        }
-
+        
         internal void UpdateRegistrations() {
-            Registrations = LoadRegistrations();
+            Registrations = Persistence.Load();
+            SetRegistrationNumbers();
+
             Emails = Registrations.Any() 
                 ? Registrations.Select(x => x.OwnerEmail).Aggregate((y, z) => y + ";" + z) 
                 : string.Empty;
+
             SixMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.SixMonths).Count();
             NineMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.NineMonths).Count();
             NineToFifteenMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.NineToFifteenMonths).Count();
@@ -81,6 +80,32 @@ namespace LbkRegister.ViewModels {
             FifteenMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.FifteenMonths).Count();
             EightYearsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.EightYears).Count();
             TotalCount = Registrations.Count();
+        }
+
+        private void SetRegistrationNumbers() {
+            /* 
+                Ring
+                Grupp
+                Ras
+                klass (yngst först)
+                kön (hane först)
+                namn (bokstavsordning)  
+             */
+
+            var regs = Registrations
+                .OrderBy(c => c.Ring)
+                .ThenBy(c => c.CompetitionGroup)
+                .ThenBy(c => c.Breed)
+                .ThenBy(c => c.Group)
+                .ThenBy(c => c.Sex)
+                .ThenBy(c => c.Name);
+
+            var nextNumber = 1;
+            foreach (var registration in regs) {
+                registration.CompetitionNumber = nextNumber;
+
+                nextNumber++;
+            }            
         }
 
         internal void DeleteRegistration(Registration registration) {

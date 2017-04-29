@@ -1,20 +1,24 @@
 ﻿namespace LbkRegister.Domain {
     public static class CompetitionGroup {
         public enum Groups {
-            Unknown = 0,
-            One = 1,
-            Two = 2,
-            Three = 3,
-            Four = 4,
-            Five = 5,
-            Six = 6,
-            Seven = 7,
-            Eight = 8,
-            Nine = 9,
-            Ten = 10
+            Unknown,
+            One,
+            Two,
+            Three,
+            Four,
+            Five,
+            Six,
+            Seven,
+            Eight,
+            Nine,
+            Ten
         }
 
         public static Groups FromBreed(this string breed) {
+            if (breed.ToLower().Contains("tax")) {
+                return Groups.Four;
+            }
+
             switch (breed.ToLower()) {
                 case "australian cattledog":
                 case "australian kelpie":
@@ -165,9 +169,6 @@
                 case "west highland white terrier":
                 case "yorkshireterrier":
                     return Groups.Three;
-
-                case "tax":
-                    return Groups.Four;
 
                 case "akita":
                 case "alaskan malamute":
@@ -366,7 +367,8 @@
                 case "pudel, stor":
                 case "pudel, toy":
                 case "russkaya tsvetnaya bolonka":
-                case "russkiy toy":
+                case "Russkiy toy, släthårig":
+                case "Russkiy toy, långhårig":
                 case "shih tzu":
                 case "tibetansk spaniel":
                 case "tibetansk terrier":

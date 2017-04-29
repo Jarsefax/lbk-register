@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GemBox.Spreadsheet;
 using LbkRegister.Domain;
 using Newtonsoft.Json;
 
@@ -53,6 +54,11 @@ namespace LbkRegister.Data {
             var fullPath = Path.Combine(path, _saveFileName) + count.ToString() + ".txt";
 
             File.WriteAllText(fullPath, JsonConvert.SerializeObject(result));
+        }
+
+        internal static void SaveCatalog(ExcelFile file) {
+            var path = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath), "Katalog.xls");
+            file.Save(path);
         }
     }
 }

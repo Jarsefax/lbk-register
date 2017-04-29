@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using LbkRegister.Data;
+using LbkRegister.Dependencies;
 using LbkRegister.Domain;
 using LbkRegister.ViewModels;
 using static LbkRegister.Domain.CompetitionClass;
@@ -69,10 +70,14 @@ namespace LbkRegister.Views {
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             (DataContext as MainWindowViewModel).DeleteRegistration((sender as Button).DataContext as Registration);
+
+            (DataContext as MainWindowViewModel).UpdateRegistrations();
         }
 
         private void CatalogButton_Click(object sender, RoutedEventArgs e) {
+            new CatalogGenerator((DataContext as MainWindowViewModel).Registrations).Create();
 
+            MessageBox.Show("Skapat katalog");
         }
     }
 }
