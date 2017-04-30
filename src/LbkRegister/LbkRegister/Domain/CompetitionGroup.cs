@@ -94,6 +94,7 @@
                 case "dvärgschnauzer, peppar & salt":
                 case "dvärgschnauzer, svart":
                 case "dvärgschnauzer, svart & silver":
+                case "Dvärgschnauzer, vit":
                 case "engelsk bulldogg":
                 case "entlebucher sennenhund":
                 case "fila brasileiro":
