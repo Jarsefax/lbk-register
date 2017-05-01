@@ -60,6 +60,72 @@ namespace LbkRegister.ViewModels {
             get { return totalCount; }
             set { SetField(ref totalCount, value); }
         }
+        
+        private int groupUnknownCount;
+        public int GroupUnknownCount {
+            get { return groupUnknownCount; }
+            set { SetField(ref groupUnknownCount, value); }
+        }
+
+        private int groupOneCount;
+        public int GroupOneCount {
+            get { return groupOneCount; }
+            set { SetField(ref groupOneCount, value); }
+        }
+
+        private int groupTwoCount;
+        public int GroupTwoCount {
+            get { return groupTwoCount; }
+            set { SetField(ref groupTwoCount, value); }
+        }
+
+        private int groupThreeCount;
+        public int GroupThreeCount {
+            get { return groupThreeCount; }
+            set { SetField(ref groupThreeCount, value); }
+        }
+
+        private int groupFourCount;
+        public int GroupFourCount {
+            get { return groupFourCount; }
+            set { SetField(ref groupFourCount, value); }
+        }
+
+        private int groupFiveCount;
+        public int GroupFiveCount {
+            get { return groupFiveCount; }
+            set { SetField(ref groupFiveCount, value); }
+        }
+
+        private int groupSixCount;
+        public int GroupSixCount {
+            get { return groupSixCount; }
+            set { SetField(ref groupSixCount, value); }
+        }
+
+        private int groupSevenCount;
+        public int GroupSevenCount {
+            get { return groupSevenCount; }
+            set { SetField(ref groupSevenCount, value); }
+        }
+
+        private int groupEightCount;
+        public int GroupEightCount {
+            get { return groupEightCount; }
+            set { SetField(ref groupEightCount, value); }
+        }
+
+        private int groupNineCount;
+        public int GroupNineCount {
+            get { return groupNineCount; }
+            set { SetField(ref groupNineCount, value); }
+        }
+
+        private int groupTenCount;
+        public int GroupTenCount {
+            get { return groupTenCount; }
+            set { SetField(ref groupTenCount, value); }
+        }
 
         public MainWindowViewModel() {
             UpdateRegistrations();
@@ -80,7 +146,24 @@ namespace LbkRegister.ViewModels {
             FifteenMonthsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.FifteenMonths).Count();
             EightYearsCount = Registrations.Where(r => r.Group == CompetitionClass.Categories.EightYears).Count();
             TotalCount = Registrations.Count();
+
+            GroupUnknownCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Unknown).Count();
+            GroupOneCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.One).Count();
+            GroupTwoCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Two).Count();
+            GroupThreeCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Three).Count();
+            GroupFourCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Four).Count();
+            GroupFiveCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Five).Count();
+            GroupSixCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Six).Count();
+            GroupSevenCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Seven).Count();
+            GroupEightCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Eight).Count();
+            GroupNineCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Nine).Count();
+            GroupTenCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Ten).Count();
         }
+
+        /*
+         * BIR (Best In Race) valp(2 klasser?)/vuxen(3 klasser!)/veteran per ras
+         * BIM (Best I Motsatt kön) om, minst, en hane och en hona i samma ras och klasser (
+         */
 
         private void SetRegistrationNumbers() {
             /* 

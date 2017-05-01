@@ -1,5 +1,17 @@
 ﻿namespace LbkRegister.Domain {
     public static class CompetitionGroup {
+        public const string _groupUnknownName = "Okänd Grupp";
+        public const string _groupOneName = "Grupp Ett";
+        public const string _groupTwoName = "Grupp Två";
+        public const string _groupThreeName = "Grupp Tre";
+        public const string _groupFourName = "Grupp Fyra";
+        public const string _groupFiveName = "Grupp Fem";
+        public const string _groupSixName = "Grupp Sex";
+        public const string _groupSevenName = "Grupp Sju";
+        public const string _groupEightName = "Grupp Åtta";
+        public const string _groupNineName = "Grupp Nio";
+        public const string _groupTenName = "Grupp Tio";
+
         public enum Groups {
             Unknown,
             One,
@@ -12,6 +24,35 @@
             Eight,
             Nine,
             Ten
+        }
+
+        public static string ToName(this Groups category) {
+            switch (category) {
+                case Groups.Unknown:
+                    return _groupUnknownName;
+                case Groups.One:
+                    return _groupOneName;
+                case Groups.Two:
+                    return _groupTwoName;
+                case Groups.Three:
+                    return _groupThreeName;
+                case Groups.Four:
+                    return _groupFourName;
+                case Groups.Five:
+                    return _groupFiveName;
+                case Groups.Six:
+                    return _groupSixName;
+                case Groups.Seven:
+                    return _groupSevenName;
+                case Groups.Eight:
+                    return _groupEightName;
+                case Groups.Nine:
+                    return _groupNineName;
+                case Groups.Ten:
+                    return _groupTenName;
+                default:
+                    return string.Empty;
+            }
         }
 
         public static Groups FromBreed(this string breed) {

@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -58,9 +59,54 @@
             <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding TotalCount}" />
         </Grid>
 
+        <Grid Grid.Row="0" Grid.Column="2" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Name="groupUnknownLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Name="groupOneLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="2" Name="groupTwoLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="3" Name="groupThreeLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="4" Name="groupFourLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="5" Name="groupFiveLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="6" Name="groupSixLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="7" Name="groupSevenLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="8" Name="groupEightLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="9" Name="groupNineLabel" />
+            <TextBlock Grid.Column="0" Grid.Row="10" Name="groupTenLabel" />
+
+            <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding GroupUnknownCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding GroupOneCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding GroupTwoCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding GroupThreeCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding GroupFourCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding GroupFiveCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="6" Margin="40,0,0,0" Text="{Binding GroupSixCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding GroupSevenCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="8" Margin="40,0,0,0" Text="{Binding GroupEightCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="9" Margin="40,0,0,0" Text="{Binding GroupNineCount}" />
+            <TextBlock Grid.Column="1" Grid.Row="10" Margin="40,0,0,0" Text="{Binding GroupTenCount}" />
+        </Grid>
+
         <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" />
 
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Registrations}">
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Registrations}">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Style.Triggers>

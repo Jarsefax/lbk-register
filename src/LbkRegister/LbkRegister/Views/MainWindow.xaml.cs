@@ -18,6 +18,18 @@ namespace LbkRegister.Views {
             fifteenMonthsLabel.Text = Categories.FifteenMonths.ToName();
             eightYearsLabel.Text = Categories.EightYears.ToName();
 
+            groupUnknownLabel.Text = CompetitionGroup.Groups.Unknown.ToName();
+            groupOneLabel.Text = CompetitionGroup.Groups.One.ToName();
+            groupTwoLabel.Text = CompetitionGroup.Groups.Two.ToName();
+            groupThreeLabel.Text = CompetitionGroup.Groups.Three.ToName();
+            groupFourLabel.Text = CompetitionGroup.Groups.Four.ToName();
+            groupFiveLabel.Text = CompetitionGroup.Groups.Five.ToName();
+            groupSixLabel.Text = CompetitionGroup.Groups.Six.ToName();
+            groupSevenLabel.Text = CompetitionGroup.Groups.Seven.ToName();
+            groupEightLabel.Text = CompetitionGroup.Groups.Eight.ToName();
+            groupNineLabel.Text = CompetitionGroup.Groups.Nine.ToName();
+            groupTenLabel.Text = CompetitionGroup.Groups.Ten.ToName();
+
             Persistence.Initialize();
             DataContext = new MainWindowViewModel();
         }
