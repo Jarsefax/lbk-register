@@ -106,12 +106,31 @@
 
         <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" />
 
+        <Grid Grid.Row="1" Grid.Column="2" Margin="20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Text="BIR" Grid.Row="0" Grid.Column="0" />
+            <TextBox Text="{Binding BestInRaceCount}" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+
+            <TextBox Text="BIM" Grid.Row="0" Grid.Column="3" />
+            <TextBox Text="{Binding BestInMotsattKönCount}" Grid.Row="0" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+        </Grid>
+
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Registrations}">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding BreedError, Mode=OneWay}" Value="True">
                             <Setter Property="Background" Value="Red" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding SexError, Mode=OneWay}" Value="True">
+                            <Setter Property="Foreground" Value="Cyan" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

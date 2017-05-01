@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -127,6 +128,18 @@ namespace LbkRegister.ViewModels {
             set { SetField(ref groupTenCount, value); }
         }
 
+        private int bestInRaceCount;
+        public int BestInRaceCount {
+            get { return bestInRaceCount; }
+            set { SetField(ref bestInRaceCount, value); }
+        }
+
+        private int bestInMotsattKönCount;
+        public int BestInMotsattKönCount {
+            get { return bestInMotsattKönCount; }
+            set { SetField(ref bestInMotsattKönCount, value); }
+        }
+
         public MainWindowViewModel() {
             UpdateRegistrations();
         }
@@ -158,12 +171,44 @@ namespace LbkRegister.ViewModels {
             GroupEightCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Eight).Count();
             GroupNineCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Nine).Count();
             GroupTenCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Ten).Count();
+
+            SetBestInCounts();
         }
 
-        /*
-         * BIR (Best In Race) valp(2 klasser?)/vuxen(3 klasser!)/veteran per ras
-         * BIM (Best I Motsatt kön) om, minst, en hane och en hona i samma ras och klasser (
-         */
+        private void SetBestInCounts() {
+            var pups = Registrations.Where(r => 
+                r.Group == CompetitionClass.Categories.SixMonths || 
+                r.Group == CompetitionClass.Categories.NineMonths);
+            var pupGroups = pups.GroupBy(p => p.Breed);
+
+            var adults = Registrations.Where(r =>
+                r.Group == CompetitionClass.Categories.NineToFifteenMonths ||
+                r.Group == CompetitionClass.Categories.FifteenToTwentyFourMonths ||
+                r.Group == CompetitionClass.Categories.FifteenMonths);
+            var adultGroups = adults.GroupBy(p => p.Breed);
+
+            var veterans = Registrations.Where(r =>
+                r.Group == CompetitionClass.Categories.EightYears);
+            var veteranGroups = veterans.GroupBy(p => p.Breed);
+
+            // BIR (Best In Race) valp(2 klasser?)/vuxen(3 klasser!)/veteran per ras
+            BestInRaceCount = GetBirCount(pups) + GetBirCount(adults) + GetBirCount(veterans);
+
+            // BIM (Best I Motsatt kön) om, minst, en hane och en hona i samma ras och klasser
+            BestInMotsattKönCount = GetGroupBimCount(pupGroups) + GetGroupBimCount(adultGroups) + GetGroupBimCount(veteranGroups);
+        }
+
+        private int GetBirCount(IEnumerable<Registration> registrations) =>
+            registrations
+                .Select(p => p.Breed)
+                .Distinct()
+            .Count();
+
+        private int GetGroupBimCount(IEnumerable<IGrouping<string, Registration>> groups) =>
+            groups.Where(x => 
+                x.Any(y => y.Gender == Sex.Genders.Male && 
+                x.Any(z => z.Gender == Sex.Genders.Female))
+            ).Count();
 
         private void SetRegistrationNumbers() {
             /* 

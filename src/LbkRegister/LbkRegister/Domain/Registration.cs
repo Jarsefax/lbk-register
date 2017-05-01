@@ -23,7 +23,7 @@ namespace LbkRegister.Domain {
         private const string _ownerPhoneNumberIdentifier = "Ditt telefon nummer:";
         private const string _ownerEmailIdentifier = "Din epost:";
         private const string _noteIdentifier = "Meddelande:";
-        
+
         [JsonIgnore]
         public int CompetitionNumber {
             get { return competitionNumber; }
@@ -40,13 +40,14 @@ namespace LbkRegister.Domain {
         [JsonIgnore]
         internal string GroupName => Group.ToName();
 
-        //[JsonIgnore]
-        //public bool BreedError {
-        //    get { return breedError; }
-        //    set { SetField(ref breedError, value); }
-        //}
-        //private bool breedError;
+        [JsonIgnore]
         public bool BreedError => Breed.FromBreed() == Domain.CompetitionGroup.Groups.Unknown;
+
+        [JsonIgnore]
+        internal Sex.Genders Gender => Sex.FromInput();
+
+        [JsonIgnore]
+        public bool SexError => Gender == Domain.Sex.Genders.Unknown;
 
         public string Source { get; }
         public string Breed { get; set; }

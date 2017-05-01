@@ -38,7 +38,7 @@ namespace LbkRegister.Dependencies {
                 .OrderBy(c => c.CompetitionGroup)
                 .ThenBy(c => c.Breed)
                 .ThenBy(c => c.Group)
-                .ThenBy(c => c.Sex)
+                .ThenBy(c => c.Gender)
                 .ThenBy(c => c.Name);
 
             CompetitionGroup.Groups? lastGroup = null;
