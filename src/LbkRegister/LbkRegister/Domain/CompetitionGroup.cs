@@ -94,7 +94,7 @@
                 case "dvärgschnauzer, peppar & salt":
                 case "dvärgschnauzer, svart":
                 case "dvärgschnauzer, svart & silver":
-                case "Dvärgschnauzer, vit":
+                case "dvärgschnauzer, vit":
                 case "engelsk bulldogg":
                 case "entlebucher sennenhund":
                 case "fila brasileiro":
@@ -368,8 +368,8 @@
                 case "pudel, stor":
                 case "pudel, toy":
                 case "russkaya tsvetnaya bolonka":
-                case "Russkiy toy, släthårig":
-                case "Russkiy toy, långhårig":
+                case "russkiy toy, släthårig":
+                case "russkiy toy, långhårig":
                 case "shih tzu":
                 case "tibetansk spaniel":
                 case "tibetansk terrier":
