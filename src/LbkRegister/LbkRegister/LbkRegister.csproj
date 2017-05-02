@@ -35,9 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GemBox.Spreadsheet, Version=41.3.30.1070, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
-      <HintPath>..\packages\GemBox.Spreadsheet.41.3.30.1070\lib\net30\GemBox.Spreadsheet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Ionic.Zip.Reduced">
+      <HintPath>..\..\..\bin\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -68,6 +67,7 @@
     <Compile Include="Domain\Sex.cs" />
     <Compile Include="IO\Persistence.cs" />
     <Compile Include="IO\CatalogGenerator.cs" />
+    <Compile Include="Spreadsheet\OdsGeneration.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ChangeGroup.xaml.cs">
@@ -124,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="IO\template.ods" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

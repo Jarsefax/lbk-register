@@ -49,6 +49,24 @@ namespace LbkRegister.Domain {
         [JsonIgnore]
         public bool SexError => Gender == Domain.Sex.Genders.Unknown;
 
+        [JsonIgnore]
+        public string CatalogBirthDate => " FÖDD " + BirthDate;
+        [JsonIgnore]
+        public string CatalogFather => "E. " + Father;
+        [JsonIgnore]
+        public string CatalogMother => ", U." + Mother;
+        [JsonIgnore]
+        public string CatalogBreeder => "Uppf " + Breeder;
+        [JsonIgnore]
+        public string CatalogOwner => ", Ägare " + OwnerName + " " + OwnerAddress + " " + OwnerPostalCode + " " + OwnerCity;
+
+        [JsonIgnore]
+        public string CatalogRowOne => Name + " " + IdentificationNumber + CatalogBirthDate;
+        [JsonIgnore]
+        public string CatalogRowTwo => CatalogFather + CatalogMother;
+        [JsonIgnore]
+        public string CatalogRowThree => CatalogBreeder + CatalogOwner;
+
         public string Source { get; }
         public string Breed { get; set; }
         public string Name { get; set; }

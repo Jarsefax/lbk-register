@@ -20,5 +20,18 @@
 
             return Genders.Unknown;
         }
+
+        public static string ToLabel(this Genders gender) {
+            switch (gender) {
+                case Genders.Unknown:
+                    return "Okända Kön";
+                case Genders.Male:
+                    return "Hanar";
+                case Genders.Female:
+                    return "Tikar";
+            }
+
+            throw new System.Exception("Ohanterat kön");
+        }
     }
 }
