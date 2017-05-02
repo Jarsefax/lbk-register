@@ -67,7 +67,7 @@ namespace LbkRegister.Dependencies {
                     ringSheet.Rows[row][0] = group.Value.ToName();
                 }
 
-                if (string.IsNullOrEmpty(breed) || registration.Breed.Equals(breed) == false) {
+                if (string.IsNullOrEmpty(breed) || registration.Breed.ToLower().Equals(breed.ToLower()) == false) {
                     // new breed
                     breed = registration.Breed;
 
