@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LbkRegister.Data;
@@ -140,6 +141,12 @@ namespace LbkRegister.ViewModels {
             set { SetField(ref bestInMotsattKönCount, value); }
         }
 
+        private DataTable breedCounts;
+        public DataTable BreedCounts {
+            get { return breedCounts; }
+            set { SetField(ref breedCounts, value); }
+        }
+
         public MainWindowViewModel() {
             UpdateRegistrations();
         }
@@ -173,6 +180,7 @@ namespace LbkRegister.ViewModels {
             GroupTenCount = Registrations.Where(r => r.CompetitionGroup == CompetitionGroup.Groups.Ten).Count();
 
             SetBestInCounts();
+            SetBreedCounts();
         }
 
         private void SetBestInCounts() {
@@ -196,6 +204,24 @@ namespace LbkRegister.ViewModels {
 
             // BIM (Best I Motsatt kön) om, minst, en hane och en hona i samma ras och klasser
             BestInMotsattKönCount = GetGroupBimCount(pupGroups) + GetGroupBimCount(adultGroups) + GetGroupBimCount(veteranGroups);
+        }
+
+        private void SetBreedCounts() {
+            var set = new DataSet();
+            var table = set.Tables.Add();
+            table.Columns.Add("Ras");
+            table.Columns.Add("Antal");
+
+            var breeds = Registrations.GroupBy(r => r.Breed.ToLower()).Select(g => new { Breed = g.Key, Count = g.Count() }).OrderBy(o => o.Breed);
+            var row = 0;
+            foreach (var breed in breeds) {
+                table.Rows.Add();
+                table.Rows[row][0] = breed.Breed;
+                table.Rows[row][1] = breed.Count;
+                row = row + 1;
+            }
+
+            BreedCounts = table;
         }
 
         private int GetBirCount(IEnumerable<Registration> registrations) =>

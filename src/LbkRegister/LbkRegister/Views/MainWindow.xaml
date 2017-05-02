@@ -6,179 +6,205 @@
         xmlns:local="clr-namespace:LbkRegister.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="1050">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <TabControl>
+        <TabItem Header="Anmälningar">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="10" VerticalAlignment="Center">
-            <Button Content="Registrera anmälan" Click="RegisterButton_Click" Width="200" Height="50" Margin="0,0,0,10" />
-            <Button Content="Skapa katalog" Click="CatalogButton_Click" Width="200" Height="50" Margin="0,10,0,0" />
-        </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="10" VerticalAlignment="Center">
+                    <Button Content="Registrera anmälan" Click="RegisterButton_Click" Width="200" Height="50" Margin="0,0,0,10" />
+                    <Button Content="Skapa katalog" Click="CatalogButton_Click" Width="200" Height="50" Margin="0,10,0,0" />
+                </StackPanel>                
 
-        <Grid Grid.Row="0" Grid.Column="1" Margin="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" />                
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Registrations}">
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding BreedError, Mode=OneWay}" Value="True">
+                                    <Setter Property="Background" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SexError, Mode=OneWay}" Value="True">
+                                    <Setter Property="Foreground" Value="Cyan" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Name="sixMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="1" Name="nineMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="nineToFifteenMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="3" Name="fifteenToTwentyFourMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="4" Name="fifteenMonthsLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="5" Name="eightYearsLabel" />
-            <Separator Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" />
-            <TextBlock Grid.Column="0" Grid.Row="7" Text="Totalt" />            
-
-            <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding SixMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding NineMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding NineToFifteenMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding FifteenToTwentyFourMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding FifteenMonthsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding EightYearsCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding TotalCount}" />
-        </Grid>
-
-        <Grid Grid.Row="0" Grid.Column="2" Margin="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Column="0" Grid.Row="0" Name="groupUnknownLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="1" Name="groupOneLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="groupTwoLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="3" Name="groupThreeLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="4" Name="groupFourLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="5" Name="groupFiveLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="6" Name="groupSixLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="7" Name="groupSevenLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="8" Name="groupEightLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="9" Name="groupNineLabel" />
-            <TextBlock Grid.Column="0" Grid.Row="10" Name="groupTenLabel" />
-
-            <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding GroupUnknownCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding GroupOneCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding GroupTwoCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding GroupThreeCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding GroupFourCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding GroupFiveCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="6" Margin="40,0,0,0" Text="{Binding GroupSixCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding GroupSevenCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="8" Margin="40,0,0,0" Text="{Binding GroupEightCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="9" Margin="40,0,0,0" Text="{Binding GroupNineCount}" />
-            <TextBlock Grid.Column="1" Grid.Row="10" Margin="40,0,0,0" Text="{Binding GroupTenCount}" />
-        </Grid>
-
-        <TextBox IsReadOnly="True" Text="{Binding Emails}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" />
-
-        <Grid Grid.Row="1" Grid.Column="2" Margin="20,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <TextBox Text="BIR" Grid.Row="0" Grid.Column="0" />
-            <TextBox Text="{Binding BestInRaceCount}" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
-
-            <TextBox Text="BIM" Grid.Row="0" Grid.Column="3" />
-            <TextBox Text="{Binding BestInMotsattKönCount}" Grid.Row="0" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
-        </Grid>
-
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Registrations}">
-            <ListView.Resources>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding BreedError, Mode=OneWay}" Value="True">
-                            <Setter Property="Background" Value="Red" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding SexError, Mode=OneWay}" Value="True">
-                            <Setter Property="Foreground" Value="Cyan" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.Resources>
-            
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Nummer" Width="Auto" DisplayMemberBinding="{Binding CompetitionNumber, Mode=OneWay}" />
-                    <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed, Mode=OneWay}" />
-                    <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name, Mode=OneWay}" />
-                    <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName, Mode=OneWay}" />
-                    <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName, Mode=OneWay}" />
-                    <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail, Mode=OneWay}" />
-                    <GridViewColumn Header="Ändra anmälan">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button                                    
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Nummer" Width="Auto" DisplayMemberBinding="{Binding CompetitionNumber, Mode=OneWay}" />
+                            <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed, Mode=OneWay}" />
+                            <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name, Mode=OneWay}" />
+                            <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName, Mode=OneWay}" />
+                            <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName, Mode=OneWay}" />
+                            <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail, Mode=OneWay}" />
+                            <GridViewColumn Header="Ändra anmälan">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button                                    
                                     Width="40"
                                     Height="15"
                                     VerticalAlignment="Center"
                                     Click="ChangeRegistrationButton_Click" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Byt klass">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button                                    
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Byt klass">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button                                    
                                     Width="40"
                                     Height="15"
                                     VerticalAlignment="Center"
                                     Click="GroupChangeButton_Click" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Ta bort">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Ta bort">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
                                     Width="40"
                                     Height="15"
                                     VerticalAlignment="Center"
                                     Click="DeleteButton_Click" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Statistik">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+                    <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Name="sixMonthsLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Name="nineMonthsLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Name="nineToFifteenMonthsLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="3" Name="fifteenToTwentyFourMonthsLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="4" Name="fifteenMonthsLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="5" Name="eightYearsLabel" />
+                        <Separator Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" />
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="Totalt" />
+
+                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding SixMonthsCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding NineMonthsCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding NineToFifteenMonthsCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding FifteenToTwentyFourMonthsCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding FifteenMonthsCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding EightYearsCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding TotalCount}" />
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0,1,1,1">
+                    <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Name="groupUnknownLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Name="groupOneLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Name="groupTwoLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="3" Name="groupThreeLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="4" Name="groupFourLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="5" Name="groupFiveLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="6" Name="groupSixLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="7" Name="groupSevenLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="8" Name="groupEightLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="9" Name="groupNineLabel" />
+                        <TextBlock Grid.Column="0" Grid.Row="10" Name="groupTenLabel" />
+
+                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="40,0,0,0" Text="{Binding GroupUnknownCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="40,0,0,0" Text="{Binding GroupOneCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="2" Margin="40,0,0,0" Text="{Binding GroupTwoCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="3" Margin="40,0,0,0" Text="{Binding GroupThreeCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="4" Margin="40,0,0,0" Text="{Binding GroupFourCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="5" Margin="40,0,0,0" Text="{Binding GroupFiveCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="6" Margin="40,0,0,0" Text="{Binding GroupSixCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="7" Margin="40,0,0,0" Text="{Binding GroupSevenCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="8" Margin="40,0,0,0" Text="{Binding GroupEightCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="9" Margin="40,0,0,0" Text="{Binding GroupNineCount}" />
+                        <TextBlock Grid.Column="1" Grid.Row="10" Margin="40,0,0,0" Text="{Binding GroupTenCount}" />
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" BorderBrush="Black" BorderThickness="0,1,1,1">
+                    <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding BreedCounts}" />
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                    <Grid Margin="20,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="BIR" Grid.Row="0" Grid.Column="0" />
+                        <TextBox Text="{Binding BestInRaceCount}" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+
+                        <TextBox Text="BIM" Grid.Row="0" Grid.Column="3" />
+                        <TextBox Text="{Binding BestInMotsattKönCount}" Grid.Row="0" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+    </TabControl>    
 </Window>

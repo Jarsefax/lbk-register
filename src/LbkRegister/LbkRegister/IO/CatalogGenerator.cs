@@ -63,7 +63,6 @@ namespace LbkRegister.Dependencies {
                     group = registration.CompetitionGroup;
 
                     AddRows(2, ringSheet, ref row);
-                    //row = row + 2;
                     ringSheet.Rows[row][0] = group.Value.ToName();
                 }
 
@@ -72,7 +71,6 @@ namespace LbkRegister.Dependencies {
                     breed = registration.Breed;
 
                     AddRows(2, ringSheet, ref row);
-                    //row = row + 2;
                     ringSheet.Rows[row][3] = breed;
                 }
 
@@ -82,7 +80,6 @@ namespace LbkRegister.Dependencies {
                     gender = registration.Gender;
 
                     AddRows(2, ringSheet, ref row);
-                    //row = row + 2;
                     ringSheet.Rows[row][1] = registration.Group.ToName();
                     ringSheet.Rows[row][5] = registration.Gender.ToLabel();
                 }
@@ -90,14 +87,12 @@ namespace LbkRegister.Dependencies {
                 if (!gender.HasValue || registration.Gender != gender) {
                     // new gender
                     AddRows(2, ringSheet, ref row);
-                    //row = row + 2;
                     ringSheet.Rows[row][1] = registration.Group.ToName();
                     ringSheet.Rows[row][5] = registration.Gender.ToLabel();
                 }
 
                 // write next registration
                 AddRows(1, ringSheet, ref row);
-                //row = row + 1;
                 ringSheet.Rows[row][0] = registration.CompetitionNumber;
                 ringSheet.Rows[row][2] = registration.CatalogRowOne;
                 
