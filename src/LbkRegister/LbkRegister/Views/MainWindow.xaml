@@ -184,24 +184,47 @@
                 </Border>
 
                 <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" BorderBrush="Black" BorderThickness="0,1,1,1">
-                    <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding BreedCounts}" />
+                    <ScrollViewer>
+                        <StackPanel>
+                            <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding RingOneBreedCounts}" />
+                            <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding RingTwoBreedCounts}" />
+                        </StackPanel>
+                    </ScrollViewer>
                 </Border>
 
                 <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
                     <Grid Margin="20,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Text="BIR" Grid.Row="0" Grid.Column="0" />
-                        <TextBox Text="{Binding BestInRaceCount}" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+                        <TextBox Text="Valp BIR" Grid.Row="0" Grid.Column="0" />
+                        <TextBox Text="{Binding PupBestInRaceCount}" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
 
-                        <TextBox Text="BIM" Grid.Row="0" Grid.Column="3" />
-                        <TextBox Text="{Binding BestInMotsattKönCount}" Grid.Row="0" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+                        <TextBox Text="Vuxna BIR" Grid.Row="1" Grid.Column="0" />
+                        <TextBox Text="{Binding AdultBestInRaceCount}" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+
+                        <TextBox Text="Veteran BIR" Grid.Row="2" Grid.Column="0" />
+                        <TextBox Text="{Binding VeteranBestInRaceCount}" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+
+                        <TextBox Text="Valp BIM" Grid.Row="0" Grid.Column="3" />
+                        <TextBox Text="{Binding PupBestInMotsattKönCount}" Grid.Row="0" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+
+                        <TextBox Text="Vuxna BIM" Grid.Row="1" Grid.Column="3" />
+                        <TextBox Text="{Binding AdultBestInMotsattKönCount}" Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
+
+                        <TextBox Text="Veteran BIM" Grid.Row="2" Grid.Column="3" />
+                        <TextBox Text="{Binding VeteranBestInMotsattKönCount}" Grid.Row="2" Grid.Column="4" HorizontalContentAlignment="Right" Padding="0,0,5,0" />
                     </Grid>
                 </Border>
             </Grid>

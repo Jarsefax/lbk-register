@@ -10,26 +10,28 @@
             switch (group) {
                 case CompetitionGroup.Groups.Unknown:
                     return Rings.Unknown;
+
                 case CompetitionGroup.Groups.One:
-                    return Rings.Unknown;
+                    return Rings.One;
                 case CompetitionGroup.Groups.Two:
-                    return Rings.Unknown;
-                case CompetitionGroup.Groups.Three:
-                    return Rings.Unknown;
+                    return Rings.One;
                 case CompetitionGroup.Groups.Four:
-                    return Rings.Unknown;
-                case CompetitionGroup.Groups.Five:
-                    return Rings.Unknown;
-                case CompetitionGroup.Groups.Six:
-                    return Rings.Unknown;
-                case CompetitionGroup.Groups.Seven:
-                    return Rings.Unknown;
-                case CompetitionGroup.Groups.Eight:
-                    return Rings.Unknown;
+                    return Rings.One;
                 case CompetitionGroup.Groups.Nine:
-                    return Rings.Unknown;
+                    return Rings.One;
+
+                case CompetitionGroup.Groups.Three:
+                    return Rings.Two;
+                case CompetitionGroup.Groups.Five:
+                    return Rings.Two;
+                case CompetitionGroup.Groups.Six:
+                    return Rings.Two;
+                case CompetitionGroup.Groups.Seven:
+                    return Rings.Two;
+                case CompetitionGroup.Groups.Eight:
+                    return Rings.Two;
                 case CompetitionGroup.Groups.Ten:
-                    return Rings.Unknown;
+                    return Rings.Two;
             }
 
             return Rings.Unknown;

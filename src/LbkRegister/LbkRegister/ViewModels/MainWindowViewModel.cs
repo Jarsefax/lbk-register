@@ -129,22 +129,52 @@ namespace LbkRegister.ViewModels {
             set { SetField(ref groupTenCount, value); }
         }
 
-        private int bestInRaceCount;
-        public int BestInRaceCount {
-            get { return bestInRaceCount; }
-            set { SetField(ref bestInRaceCount, value); }
+        private int pupBestInRaceCount;
+        public int PupBestInRaceCount {
+            get { return pupBestInRaceCount; }
+            set { SetField(ref pupBestInRaceCount, value); }
         }
 
-        private int bestInMotsattKönCount;
-        public int BestInMotsattKönCount {
-            get { return bestInMotsattKönCount; }
-            set { SetField(ref bestInMotsattKönCount, value); }
+        private int adultBestInRaceCount;
+        public int AdultBestInRaceCount {
+            get { return adultBestInRaceCount; }
+            set { SetField(ref adultBestInRaceCount, value); }
         }
 
-        private DataTable breedCounts;
-        public DataTable BreedCounts {
-            get { return breedCounts; }
-            set { SetField(ref breedCounts, value); }
+        private int veteranBestInRaceCount;
+        public int VeteranBestInRaceCount {
+            get { return veteranBestInRaceCount; }
+            set { SetField(ref veteranBestInRaceCount, value); }
+        }
+
+        private int pupBestInMotsattKönCount;
+        public int PupBestInMotsattKönCount {
+            get { return pupBestInMotsattKönCount; }
+            set { SetField(ref pupBestInMotsattKönCount, value); }
+        }
+
+        private int adultBestInMotsattKönCount;
+        public int AdultBestInMotsattKönCount {
+            get { return adultBestInMotsattKönCount; }
+            set { SetField(ref adultBestInMotsattKönCount, value); }
+        }
+
+        private int veteranBestInMotsattKönCount;
+        public int VeteranBestInMotsattKönCount {
+            get { return veteranBestInMotsattKönCount; }
+            set { SetField(ref veteranBestInMotsattKönCount, value); }
+        }
+
+        private DataTable ringOneBreedCounts;
+        public DataTable RingOneBreedCounts {
+            get { return ringOneBreedCounts; }
+            set { SetField(ref ringOneBreedCounts, value); }
+        }
+
+        private DataTable ringTwoBreedCounts;
+        public DataTable RingTwoBreedCounts {
+            get { return ringTwoBreedCounts; }
+            set { SetField(ref ringTwoBreedCounts, value); }
         }
 
         public MainWindowViewModel() {
@@ -200,28 +230,54 @@ namespace LbkRegister.ViewModels {
             var veteranGroups = veterans.GroupBy(p => p.Breed);
 
             // BIR (Best In Race) valp(2 klasser?)/vuxen(3 klasser!)/veteran per ras
-            BestInRaceCount = GetBirCount(pups) + GetBirCount(adults) + GetBirCount(veterans);
+            PupBestInRaceCount = GetBirCount(pups);
+            AdultBestInRaceCount = GetBirCount(adults);
+            VeteranBestInRaceCount = GetBirCount(veterans);
 
             // BIM (Best I Motsatt kön) om, minst, en hane och en hona i samma ras och klasser
-            BestInMotsattKönCount = GetGroupBimCount(pupGroups) + GetGroupBimCount(adultGroups) + GetGroupBimCount(veteranGroups);
+            PupBestInMotsattKönCount = GetGroupBimCount(pupGroups);
+            AdultBestInMotsattKönCount = GetGroupBimCount(adultGroups);
+            VeteranBestInMotsattKönCount = GetGroupBimCount(veteranGroups);
         }
 
         private void SetBreedCounts() {
             var set = new DataSet();
-            var table = set.Tables.Add();
-            table.Columns.Add("Ras");
-            table.Columns.Add("Antal");
+            var ringOneTable = set.Tables.Add();
+            ringOneTable.Columns.Add("Grupp");
+            ringOneTable.Columns.Add("Ras");
+            ringOneTable.Columns.Add("Antal");
 
-            var breeds = Registrations.GroupBy(r => r.Breed.ToLower()).Select(g => new { Breed = g.Key, Count = g.Count() }).OrderBy(o => o.Breed);
+            var ringTwoTable = set.Tables.Add();
+            ringTwoTable.Columns.Add("Grupp");
+            ringTwoTable.Columns.Add("Ras");
+            ringTwoTable.Columns.Add("Antal");
+
+            var breeds = Registrations
+                .GroupBy(r => r.Breed.ToLower())
+                .Select(g => new { Group = g.Key.FromBreed(), Breed = g.Key, Count = g.Count() })
+                .OrderBy(o => o.Group)
+                .ThenBy(o => o.Breed);
+
             var row = 0;
-            foreach (var breed in breeds) {
-                table.Rows.Add();
-                table.Rows[row][0] = breed.Breed;
-                table.Rows[row][1] = breed.Count;
+            foreach (var breed in breeds.Where(b => b.Group.FromGroup() == CompetitionRing.Rings.One)) {
+                ringOneTable.Rows.Add();
+                ringOneTable.Rows[row][0] = breed.Group.ToName();
+                ringOneTable.Rows[row][1] = breed.Breed;
+                ringOneTable.Rows[row][2] = breed.Count;
                 row = row + 1;
             }
 
-            BreedCounts = table;
+            row = 0;
+            foreach (var breed in breeds.Where(b => b.Group.FromGroup() == CompetitionRing.Rings.Two)) {
+                ringTwoTable.Rows.Add();
+                ringTwoTable.Rows[row][0] = breed.Group.ToName();
+                ringTwoTable.Rows[row][1] = breed.Breed;
+                ringTwoTable.Rows[row][2] = breed.Count;
+                row = row + 1;
+            }
+
+            RingOneBreedCounts = ringOneTable;
+            RingTwoBreedCounts = ringTwoTable;
         }
 
         private int GetBirCount(IEnumerable<Registration> registrations) =>
