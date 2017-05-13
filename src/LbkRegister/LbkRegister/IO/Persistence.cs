@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Xml;
 using Ionic.Zip;
 using LbkRegister.Domain;
 using Newtonsoft.Json;
@@ -15,7 +12,8 @@ namespace LbkRegister.Data {
         private const string _saveFilePath = "LEBHK";
         private const string _saveFileName = "registreringar";
         private const string _catalogFileName = "katalog";
-        
+        private const string _bisFileName = "BIS";
+
         internal static void Initialize() {
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
             Directory.CreateDirectory(path);
@@ -61,33 +59,6 @@ namespace LbkRegister.Data {
             File.WriteAllText(fullPath, JsonConvert.SerializeObject(result));
         }
 
-        //internal static void SaveCatalog(DataSet odsFile) {
-        //    var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
-        //    var files = Directory.GetFiles(path);
-        //    var count = files.Where(f => Path.GetFileNameWithoutExtension(f).Contains(_catalogFileName)).Any()
-        //        ? files
-        //            .Where(f => Path.GetFileNameWithoutExtension(f).Contains(_catalogFileName))
-        //            .Max(n => int.Parse(Path.GetFileNameWithoutExtension(n).Substring(_catalogFileName.Length))) + 1
-        //        : 0;
-        //    var fullPath = Path.Combine(path, _catalogFileName) + count.ToString() + ".xls";
-
-        //    var templateFile = ZipFile.Read(Assembly.GetExecutingAssembly().GetManifestResourceStream("LbkRegister.IO.template.ods"));
-
-        //    var contentXml = GetContentXmlFile(templateFile);
-
-        //    var nmsManager = InitializeXmlNamespaceManager(contentXml);
-
-        //    var sheetsRootNode = GetSheetsRootNodeAndRemoveChildrens(contentXml, nmsManager);
-
-        //    foreach (DataTable sheet in odsFile.Tables) {
-        //        SaveSheet(sheet, sheetsRootNode);
-        //    }
-
-        //    SaveContentXml(templateFile, contentXml);
-
-        //    templateFile.Save(fullPath);
-        //}
-
         internal static void SaveCatalog(ZipFile file) {
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
             var files = Directory.GetFiles(path);
@@ -99,6 +70,19 @@ namespace LbkRegister.Data {
             var fullPath = Path.Combine(path, _catalogFileName) + count.ToString() + ".xls";            
 
             file.Save(fullPath);
-        }        
+        }
+
+        internal static void SaveBIS(ZipFile file) {
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _saveFilePath);
+            var files = Directory.GetFiles(path);
+            var count = files.Where(f => Path.GetFileNameWithoutExtension(f).Contains(_bisFileName)).Any()
+                ? files
+                    .Where(f => Path.GetFileNameWithoutExtension(f).Contains(_bisFileName))
+                    .Max(n => int.Parse(Path.GetFileNameWithoutExtension(n).Substring(_bisFileName.Length))) + 1
+                : 0;
+            var fullPath = Path.Combine(path, _bisFileName) + count.ToString() + ".xls";
+
+            file.Save(fullPath);
+        }
     }
 }

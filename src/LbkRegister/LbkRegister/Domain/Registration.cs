@@ -58,14 +58,27 @@ namespace LbkRegister.Domain {
         [JsonIgnore]
         public string CatalogBreeder => "Uppf " + Breeder;
         [JsonIgnore]
-        public string CatalogOwner => ", Ägare " + OwnerName + " " + OwnerAddress + " " + OwnerPostalCode + " " + OwnerCity;
+        public string CatalogOwner => "Ägare " + OwnerName + " " + OwnerAddress + " " + OwnerPostalCode + " " + OwnerCity;
 
         [JsonIgnore]
         public string CatalogRowOne => Name + " " + IdentificationNumber + CatalogBirthDate;
         [JsonIgnore]
         public string CatalogRowTwo => CatalogFather + CatalogMother;
         [JsonIgnore]
-        public string CatalogRowThree => CatalogBreeder + CatalogOwner;
+        public string CatalogRowThree => CatalogBreeder;
+        [JsonIgnore]
+        public string CatalogRowFour => CatalogOwner;
+
+        [JsonIgnore]
+        public ClassGrouping.ClassGroupings Grouping => Group.FromClass();
+
+        [JsonIgnore]
+        public bool IsChecked {
+            get { return isChecked; }
+            set { SetField(ref isChecked, value); }
+        }
+        private bool isChecked;
+
 
         public string Source { get; }
         public string Breed { get; set; }

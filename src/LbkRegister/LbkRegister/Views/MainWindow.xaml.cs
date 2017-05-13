@@ -91,5 +91,11 @@ namespace LbkRegister.Views {
 
             MessageBox.Show("Skapat katalog");
         }
+
+        private void BisButton_Click(object sender, RoutedEventArgs e) {
+            new CatalogGenerator((DataContext as MainWindowViewModel).SortedRegistrations).CreateBIS();
+
+            MessageBox.Show("Skapat BIS-fil");
+        }
     }
 }

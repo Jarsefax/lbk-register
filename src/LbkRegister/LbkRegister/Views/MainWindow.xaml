@@ -229,5 +229,46 @@
                 </Border>
             </Grid>
         </TabItem>
+        <TabItem Header="Klippotek" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="10" VerticalAlignment="Center">
+                    <Button Content="Skapa BIS-fil" Click="BisButton_Click" Width="200" Height="50" Margin="0,10,0,0" />
+                </StackPanel>
+
+                <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding SortedRegistrations}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Nummer" Width="Auto" DisplayMemberBinding="{Binding CompetitionNumber, Mode=OneWay}" />
+                            <GridViewColumn Header="Ras" Width="Auto" DisplayMemberBinding="{Binding Breed, Mode=OneWay}" />
+                            <GridViewColumn Header="Namn" Width="Auto" DisplayMemberBinding="{Binding Name, Mode=OneWay}" />
+                            <GridViewColumn Header="Ägare" Width="Auto" DisplayMemberBinding="{Binding OwnerName, Mode=OneWay}" />
+                            <GridViewColumn Header="Klass" Width="Auto" DisplayMemberBinding="{Binding GroupName, Mode=OneWay}" />
+                            <GridViewColumn Header="E-post" Width="Auto" DisplayMemberBinding="{Binding OwnerEmail, Mode=OneWay}" />
+                            <GridViewColumn Header="Markera">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox
+                                            Width="20"
+                                            Height="20"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </TabItem>
     </TabControl>    
 </Window>

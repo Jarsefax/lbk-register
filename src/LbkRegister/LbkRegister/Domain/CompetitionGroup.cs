@@ -106,7 +106,8 @@
                 case "schipperke":
                 case "shetland sheepdog":
                 case "slovenský cuvac":
-                case "tysk schäferhund":
+                case "tysk schäferhund, normalhårig":
+                case "tysk schäferhund, långhårig":
                 case "vit herdehund":
                 case "vostochno-evropeiskaya ovcharka":
                 case "welsh corgi cardigan":

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -8,11 +7,17 @@ using LbkRegister.Data;
 using LbkRegister.Domain;
 
 namespace LbkRegister.ViewModels {
-    public class MainWindowViewModel : INotifyPropertyChanged {        
+    public class MainWindowViewModel : INotifyPropertyChanged {
         private IEnumerable<Registration> registrations;
         public IEnumerable<Registration> Registrations {
             get { return registrations; }
             set { SetField(ref registrations, value); }
+        }
+
+        private IEnumerable<Registration> sortedRegistrations;
+        public IEnumerable<Registration> SortedRegistrations {
+            get { return sortedRegistrations; }
+            set { SetField(ref sortedRegistrations, value); }
         }
 
         private string emails;
@@ -185,6 +190,9 @@ namespace LbkRegister.ViewModels {
             Registrations = Persistence.Load();
             SetRegistrationNumbers();
 
+            SortedRegistrations = new List<Registration>(Registrations).OrderBy(r => r.CompetitionNumber);
+
+
             Emails = Registrations.Any() 
                 ? Registrations.Select(x => x.OwnerEmail).Aggregate((y, z) => y + ";" + z) 
                 : string.Empty;
@@ -305,9 +313,10 @@ namespace LbkRegister.ViewModels {
             var regs = Registrations
                 .OrderBy(c => c.Ring)
                 .ThenBy(c => c.CompetitionGroup)
-                .ThenBy(c => c.Breed)
-                .ThenBy(c => c.Group)
+                .ThenBy(c => c.Breed.ToLower())
+                .ThenBy(c => c.Grouping)
                 .ThenBy(c => c.Sex)
+                .ThenBy(c => c.Group)
                 .ThenBy(c => c.Name);
 
             var nextNumber = 1;
